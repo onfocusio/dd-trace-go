@@ -82,51 +82,51 @@ func withCallbacks(db *gorm.DB, opts ...Option) (*gorm.DB, error) {
 	}
 
 	cb := db.Callback()
-	err := cb.Create().Before("gorm:create").Register("dd-trace-go:before_create", beforeFunc("gorm.create"))
+	err := cb.Create().Before("*").Register("dd-trace-go:before_create", beforeFunc("gorm.create"))
 	if err != nil {
 		return db, err
 	}
-	err = cb.Create().After("gorm:create").Register("dd-trace-go:after_create", afterFunc())
+	err = cb.Create().After("*").Register("dd-trace-go:after_create", afterFunc())
 	if err != nil {
 		return db, err
 	}
-	err = cb.Update().Before("gorm:update").Register("dd-trace-go:before_update", beforeFunc("gorm.update"))
+	err = cb.Update().Before("*").Register("dd-trace-go:before_update", beforeFunc("gorm.update"))
 	if err != nil {
 		return db, err
 	}
-	err = cb.Update().After("gorm:update").Register("dd-trace-go:after_update", afterFunc())
+	err = cb.Update().After("*").Register("dd-trace-go:after_update", afterFunc())
 	if err != nil {
 		return db, err
 	}
-	err = cb.Delete().Before("gorm:delete").Register("dd-trace-go:before_delete", beforeFunc("gorm.delete"))
+	err = cb.Delete().Before("*").Register("dd-trace-go:before_delete", beforeFunc("gorm.delete"))
 	if err != nil {
 		return db, err
 	}
-	err = cb.Delete().After("gorm:delete").Register("dd-trace-go:after_delete", afterFunc())
+	err = cb.Delete().After("*").Register("dd-trace-go:after_delete", afterFunc())
 	if err != nil {
 		return db, err
 	}
-	err = cb.Query().Before("gorm:query").Register("dd-trace-go:before_query", beforeFunc("gorm.query"))
+	err = cb.Query().Before("*").Register("dd-trace-go:before_query", beforeFunc("gorm.query"))
 	if err != nil {
 		return db, err
 	}
-	err = cb.Query().After("gorm:query").Register("dd-trace-go:after_query", afterFunc())
+	err = cb.Query().After("*").Register("dd-trace-go:after_query", afterFunc())
 	if err != nil {
 		return db, err
 	}
-	err = cb.Row().Before("gorm:query").Register("dd-trace-go:before_row_query", beforeFunc("gorm.row_query"))
+	err = cb.Row().Before("*").Register("dd-trace-go:before_row_query", beforeFunc("gorm.row_query"))
 	if err != nil {
 		return db, err
 	}
-	err = cb.Row().After("gorm:query").Register("dd-trace-go:after_row_query", afterFunc())
+	err = cb.Row().After("*").Register("dd-trace-go:after_row_query", afterFunc())
 	if err != nil {
 		return db, err
 	}
-	err = cb.Raw().Before("gorm:query").Register("dd-trace-go:before_raw_query", beforeFunc("gorm.raw_query"))
+	err = cb.Raw().Before("*").Register("dd-trace-go:before_raw_query", beforeFunc("gorm.raw_query"))
 	if err != nil {
 		return db, err
 	}
-	err = cb.Raw().After("gorm:query").Register("dd-trace-go:after_raw_query", afterFunc())
+	err = cb.Raw().After("*").Register("dd-trace-go:after_raw_query", afterFunc())
 	if err != nil {
 		return db, err
 	}
